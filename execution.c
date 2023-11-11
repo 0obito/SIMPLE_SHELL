@@ -5,6 +5,7 @@
  *
  * @command: pointer to array of pointers
  * @argv: arguments vector
+ * @line: char pointer
  *
  * Return: status of last execution done
  */
