@@ -13,7 +13,7 @@ int _strcmp( char *str1, char *str2)
 	int sub = 0;
 
 	sub = (int)*str1 - (int)*str2;
-	while (str1)
+	while (*str1)
 	{
 		if (*str1 != *str2)
 			break;
