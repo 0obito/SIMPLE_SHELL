@@ -18,7 +18,7 @@ char *_strdup(char *str);
 int execution(char *command[], char *argv[], char *line);
 void free_ressources(char **command);
 void free_line(char *line);
-char *_getenv(const char *name);
+char *_getenv(char *name);
 int _strcmp( char *str1, char *str2);
 
 #endif /* MAIN_H */
