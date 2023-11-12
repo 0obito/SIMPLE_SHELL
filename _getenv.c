@@ -27,9 +27,3 @@ char *_getenv(char *name)
 	}
 	return (NULL);
 }
-
-int main ()
-{
-	printf("%s\n", _getenv("PATH"));
-	return (0);
-}
