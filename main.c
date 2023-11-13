@@ -33,7 +33,6 @@ int main(int ac, char *av[])
 		command = tokenize(line);
 		if (command == NULL)
 		{
-			write(STDOUT_FILENO, "\n", 1);
 			free_line(line);
 			continue;
 		}
