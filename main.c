@@ -22,7 +22,6 @@ int main(int ac, char *av[])
 		line = read_input();
 		if (line == NULL)
 		{
-			/*free_ressources(command);*/
 			free(line);
 			line = NULL;
 			if (isatty(STDIN_FILENO) == 1)
@@ -32,6 +31,13 @@ int main(int ac, char *av[])
 		}
 
 		command = tokenize(line);
+		if (command == NULL)
+		{
+			write(STDOUT_FILENO, "\n", 1);
+			free_line(line);
+			continue;
+		}
+
 		status = execution(command, av, line);
 
 		if (line != NULL)
