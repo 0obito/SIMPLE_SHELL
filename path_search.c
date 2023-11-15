@@ -21,7 +21,7 @@ char *path_search(char *first_cmd)
 		if (first_cmd[j] == '/')
 		{
 			if (stat(first_cmd, &saint) == 0)
-					return (_strdup(first_cmd));
+					return (first_cmd);
 			return (NULL);
 		}
 	}
