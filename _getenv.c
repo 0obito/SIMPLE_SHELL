@@ -2,6 +2,7 @@
 
 /**
  * _getenv - a function that gets an environment variable
+ *
  * @name: the variable
  *
  * Return: the environment
@@ -9,7 +10,7 @@
 
 char *_getenv(char *name)
 {
-	char *p, *str1, *str2, *env;
+	char *p, *str1, *str2, *inv;
 	int i;
 
 	for (i = 0; environ[i]; i++)
@@ -19,11 +20,11 @@ char *_getenv(char *name)
 		if (_strcmp(str1, name) == 0)
 		{
 			str2 = strtok(NULL, "\n");
-			env = _strdup(str2);
-			free(p), p = NULL;
-			return (env);
+			inv = _strdup(str2);
+			free(p);
+			return (inv);
 		}
-		free(p), p = NULL;
+		free(p);
 	}
 	return (NULL);
 }

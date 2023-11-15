@@ -5,10 +5,10 @@
  * @str1: the first string
  * @str2: the second string
  *
- * Return: 0 if they are the same 
+ * Return: 0 if they are the same
  */
 
-int _strcmp( char *str1, char *str2)
+int _strcmp(char *str1, char *str2)
 {
 	int sub = 0;
 

@@ -5,14 +5,15 @@
  *
  * @ac: args count
  * @av: args vector
+ * @envp: environnement variable
  *
  * Return: status
  */
-int main(int ac, char *av[])
+int main(int ac, char *av[], char *envp[])
 {
 	char *line = NULL;
-	int status = 0;
-	char **command = NULL;
+	int status = 0, indice = 0;
+	char **cmd = NULL;
 	(void)ac;
 
 	while (1)
@@ -22,31 +23,24 @@ int main(int ac, char *av[])
 		line = read_input();
 		if (line == NULL)
 		{
-			free(line);
-			line = NULL;
+			free_line(line);
 			if (isatty(STDIN_FILENO) == 1)
 				write(STDOUT_FILENO, "\n", 1);
-
 			return (status);
 		}
+		indice++;
 
-		command = tokenize(line);
-		if (command == NULL)
+		cmd = tokenize(line, " \t\n");
+		if (cmd == NULL)
 		{
 			free_line(line);
 			continue;
 		}
 
-		status = execution(command, av, line);
+		status = execution(cmd, av, envp, indice);
 
-		if (line != NULL)
-		{
-			free(line);
-			line = NULL;
-		}
-		if (command != NULL)
-			free_ressources(command);
+		free_line(line);
+		free_ressources(cmd);
 	}
-
 	return (status);
 }

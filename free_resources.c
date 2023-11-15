@@ -3,23 +3,23 @@
 /**
  * free_ressources - frees the allocated memory
  *
- * @command: double pointer
+ * @cmd: double pointer
  *
  * Return: void
  */
-void free_ressources(char **command)
+void free_ressources(char **cmd)
 {
 	int i = 0;
 
-	if (command != NULL)
+	if (cmd != NULL)
 	{
-		for (i = 0; command[i] != NULL; i++)
+		for (i = 0; cmd[i] != NULL; i++)
 		{
-			free(command[i]);
-			command[i] = NULL;
+			free(cmd[i]);
+			cmd[i] = NULL;
 		}
 
-		free(command);
-		command = NULL;
+		free(cmd);
+		cmd = NULL;
 	}
 }
