@@ -5,13 +5,12 @@
  *
  * @cmd: pointer to array of pointers
  * @av: arguments vector
- * @line: char pointer
- * @envp: environnement variable
  * @indice: aka index
+ * @line: char pointer
  *
  * Return: status of last execution done
  */
-int execution(char *cmd[], char *av[], char *envp[], int indice)
+int execution(char **cmd, char **av, int indice, char *line)
 {
 	int status;
 	pid_t pid;
@@ -24,22 +23,19 @@ int execution(char *cmd[], char *av[], char *envp[], int indice)
 		_perror(av[0], cmd[0], indice, " not found\n");
 		return (127);
 	}
-	if (S_ISDIR(saint.st_mode))
-	{
-		_perror(av[0], cmd[0], indice, " Permission denied\n");
-		return (126);
-	}
 
 	pid = fork();
 
 	if (pid == 0)
 	{
-		exe = execve(neww, cmd, envp);
+		exe = execve(neww, cmd, environ);
 		if (exe == -1)
 		{
+			_perror(av[0], neww, indice, " Permission denied\n");
 			free_line(neww);
-			/*free_line(line);
-			free_ressources(cmd);*/
+			free_line(line);
+			free_ressources(cmd);
+			exit(126);
 		}
 	}
 	else
@@ -47,7 +43,6 @@ int execution(char *cmd[], char *av[], char *envp[], int indice)
 		waitpid(pid, &status, 0);
 		free_line(neww);
 	}
-
 	return (WEXITSTATUS(status));
 }
 

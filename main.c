@@ -5,11 +5,10 @@
  *
  * @ac: args count
  * @av: args vector
- * @envp: environnement variable
  *
  * Return: status
  */
-int main(int ac, char *av[], char *envp[])
+int main(int ac, char *av[])
 {
 	char *line = NULL;
 	int status = 0, indice = 0;
@@ -37,7 +36,7 @@ int main(int ac, char *av[], char *envp[])
 			continue;
 		}
 
-		status = execution(cmd, av, envp, indice);
+		status = execution(cmd, av, indice, line);
 
 		free_line(line);
 		free_ressources(cmd);
