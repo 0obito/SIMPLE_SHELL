@@ -10,9 +10,9 @@
  */
 int main(int ac, char *av[])
 {
-	char *line = NULL, exit[] = "exit\n";
+	char *line = NULL, **cmd = NULL;
+	char exit[] = "exit\n", env[] = "env\n";
 	int status = 0, indice = 0;
-	char **cmd = NULL;
 	(void)ac;
 
 	while (1)
@@ -20,7 +20,6 @@ int main(int ac, char *av[])
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "$ ", 2);
 		line = read_input();
-
 		if ((line == NULL) || (_strcmp(line, exit) == 0))
 		{
 			free_line(line);
@@ -28,8 +27,14 @@ int main(int ac, char *av[])
 				write(STDOUT_FILENO, "\n", 1);
 			return (status);
 		}
-		indice++;
+		if (_strcmp(line, env) == 0)
+		{
+			_getfullenv();
+			free_line(line);
+			continue;
+		}
 
+		indice++;
 		cmd = tokenize(line, " \t\n");
 		if (cmd == NULL)
 		{
@@ -38,7 +43,6 @@ int main(int ac, char *av[])
 		}
 
 		status = execution(cmd, av, indice, line);
-
 		free_line(line);
 		free_ressources(cmd);
 	}

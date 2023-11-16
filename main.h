@@ -28,5 +28,6 @@ int _strlen(char *string);
 void _perror(char *nom, char *cmd, int n, char *sms);
 int _putchar(char c);
 void freeall(char *ptr, char **doubleptr);
+void _getfullenv(void);
 
 #endif /* MAIN_H */

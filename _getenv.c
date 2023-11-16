@@ -28,3 +28,39 @@ char *_getenv(char *name)
 	}
 	return (NULL);
 }
+
+
+
+/**
+ * _getfullenv - a function that gets the full environment
+ *
+ * Return: the full environment
+ */
+
+void _getfullenv(void)
+{
+	char **fullenv;
+	int i;
+
+	if (environ == NULL)
+		return;
+
+	for (i = 0; environ[i]; i++)
+		continue;
+
+	fullenv = malloc(sizeof(char *) * (i + 1));
+
+	for (i = 0; environ[i]; i++)
+	{
+		fullenv[i] = _strdup(environ[i]);
+		write(STDOUT_FILENO, fullenv[i], _strlen(fullenv[i]));
+		write(STDOUT_FILENO, "\n", 1);
+	}
+
+	while (i > 0)
+	{
+		free(fullenv[i - 1]), fullenv[i - 1] = NULL;
+		i = i - 1;
+	}
+	free(fullenv), fullenv = NULL;
+}
