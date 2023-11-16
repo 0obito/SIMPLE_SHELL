@@ -10,7 +10,7 @@
  */
 int main(int ac, char *av[])
 {
-	char *line = NULL;
+	char *line = NULL, exit[] = "exit\n";
 	int status = 0, indice = 0;
 	char **cmd = NULL;
 	(void)ac;
@@ -20,7 +20,8 @@ int main(int ac, char *av[])
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "$ ", 2);
 		line = read_input();
-		if (line == NULL)
+
+		if ((line == NULL) || (_strcmp(line, exit) == 0))
 		{
 			free_line(line);
 			if (isatty(STDIN_FILENO) == 1)
